@@ -114,11 +114,11 @@ If you prefer manual setup:
 
 ## 👨‍💻 Author
 
-Poojan Trivedi
+Rutanshu Bhayani
 
-📧 Email: trivedipoojan92@gmail.com
+📧 Email: rutanshubhayani4252@gmail.com
 
-🔗 GitHub: [poojan20](https://github.com/poojan20)
+🔗 GitHub: [rutanshubhayani](https://github.com/rutanshubhayani)
 
 ---
 
