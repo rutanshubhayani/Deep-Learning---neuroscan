@@ -1,3 +1,6 @@
+<img width="1920" height="1491" alt="image" src="https://github.com/user-attachments/assets/df8a961c-63d7-41e8-9872-d5af170759fe" />
+
+
 # Brain Tumor Detection using MRI Scans 🧠🩻
 
 A deep learning-based web application built with **TensorFlow** and **Streamlit** to detect brain tumors from MRI scans. The model classifies MRI images as **Tumor** or **No Tumor**, providing a quick and user-friendly interface for medical image analysis.

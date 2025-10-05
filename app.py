@@ -1,41 +1,51 @@
 import streamlit as st
-import tensorflow as tf
-import numpy as np
-from PIL import Image
+from PIL import Image, ImageSequence
+import time
 
-# Load the trained model
-model = tf.keras.models.load_model("brain_tumor_model.keras") 
+# --------------------------
+# App Configuration
+# --------------------------
+st.set_page_config(
+    page_title="NeuroScan",
+    page_icon="🧠",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
 
-CLASS_NAMES = ["No Tumor", "Tumor"]
+# Apply custom CSS for dark theme
+st.markdown("""
+    <style>
+        body {background-color: #0E1117; color: white;}
+        .stApp {background-color: #0E1117;}
+        h1, h2, h3, h4, h5 {color: #00FFAA;}
+        .sidebar .sidebar-content {background-color: #1A1C23;}
+        .stButton>button {background-color: #00FFAA; color: black; font-weight: bold;}
+    </style>
+""", unsafe_allow_html=True)
 
-# Image preprocessing function
-def preprocess_image(image):
-    img = image.resize((150, 150))  # match model input size
-    img_array = np.array(img) / 255.0  # normalize
-    if len(img_array.shape) == 2:  # if grayscale
-        img_array = np.expand_dims(img_array, axis=-1)  # add channel dimension
-    img_array = np.expand_dims(img_array, axis=0)  # add batch dimension
-    return img_array
+# --------------------------
+# Sidebar Navigation
+# --------------------------
+st.sidebar.title("🧭 Navigation")
+st.sidebar.write("Select a page from below:")
+st.sidebar.page_link("pages/1_Predict.py", label="🧠 Predict Tumor")
+st.sidebar.page_link("pages/2_History.py", label="📜 Prediction History")
+st.sidebar.page_link("pages/3_Login.py", label="🔐 Login / User Management")
+st.sidebar.page_link("pages/4_About.py", label="ℹ️ About Project")
 
-# Streamlit UI
-st.title("Brain Tumor Prediction")
-uploaded_file = st.file_uploader("Choose an MRI Image", type=["jpg", "jpeg", "png"])
+# --------------------------
+# Main Page
+# --------------------------
+st.title("Welcome to 🧠 NeuroScan")
+st.markdown("An AI-based multi-class brain tumor classification system built with **Deep Learning + Streamlit**.")
 
-if uploaded_file is not None:
-    image = Image.open(uploaded_file).convert("L")  # convert to grayscale
-    # Updated line to fix the deprecation warning
-    st.image(image, caption="Uploaded MRI", use_container_width=True)
+# Load and animate local GIF
+gif_path = r"/home/rutanshu/Downloads/Deep-Learning---neuroscan(pd)/assets/Human_brain_MRI.gif"
+img = Image.open(gif_path)
 
-    if st.button("Predict"):
-        processed_img = preprocess_image(image)
-        prediction = model.predict(processed_img)[0][0]  # Get the single probability value
-        
-        # Determine the class based on a threshold (e.g., 0.5)
-        if prediction > 0.5:
-            predicted_class = CLASS_NAMES[1]
-            confidence = prediction * 100
-        else:
-            predicted_class = CLASS_NAMES[0]
-            confidence = (1 - prediction) * 100
-        
-        st.success(f"Prediction: **{predicted_class}** ({confidence:.2f}% confidence)")
+# Animate GIF frames
+placeholder = st.empty()  # Placeholder to update the image
+while True:
+    for frame in ImageSequence.Iterator(img):
+        placeholder.image(frame, use_container_width=True)
+        time.sleep(0.1)
