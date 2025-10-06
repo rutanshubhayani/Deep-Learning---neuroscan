@@ -12,7 +12,9 @@ pip install -r requirements.txt
 streamlit run app.py --server.headless true
 
 
-#Windows
+# Windows
+
+
 python -m venv venv
 
 cmd -venv\Scripts\activate
