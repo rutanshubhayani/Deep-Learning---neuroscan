@@ -14,7 +14,9 @@ streamlit run app.py --server.headless true
 
 #Windows
 python -m venv venv
+
 cmd -venv\Scripts\activate
+
 powershell - .\venv\Scripts\Activate.ps1
 
 if powershell gives error:
