@@ -25,7 +25,13 @@ if powershell gives error:
 1. Run powershell as administrator
 2. Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
+   
+
 pip install --upgrade pip
+
+
 pip install -r requirements.txt
+
+
 streamlit run app.py
 
